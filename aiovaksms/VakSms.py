@@ -1,12 +1,12 @@
 import asyncio
 import aiohttp
-from DataType import Actions, Status
+from aiovaksms.DataType import Actions, Status
 
 
 class VakSms:
     def __init__(self, key):
         self._key = key
-        self._url = "https://vak-sms.com/stubs/handler_api.php?"
+        self._url = "https://smshub.org/stubs/handler_api.php?"
 
     async def request(self, action, **kwargs):
         """
@@ -110,20 +110,20 @@ class Activation:
         raise Exception("SMS-code timed out")
 
     async def setStatus(self, status):
-        result = self._wrapper.request(action=Actions().setStatus, id=self.id, status=status)
+        result = await self._wrapper.request(action=await Actions().setStatus, id=self.id, status=status)
         return result
 
     async def cancel(self):
-        return self.setStatus(Status().cancel)
+        return await self.setStatus(await Status().cancel)
 
     async def complete(self):
-        return self.setStatus(Status().complete)
+        return await self.setStatus(await Status().complete)
 
     async def repeat(self):
-        return self.setStatus(Status().repeat)
+        return await self.setStatus(await Status().repeat)
 
     async def ready(self):
-        return self.setStatus(Status().ready)
+        return await self.setStatus(await Status().ready)
 
     async def used(self):
-        return self.setStatus(Status().used)
+        return await self.setStatus(await Status().used)
