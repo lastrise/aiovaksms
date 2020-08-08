@@ -138,3 +138,7 @@ class Services:
     @property
     async def Protonmail(self):
         return "dp"
+    
+    @property
+    async def McDonalds(self):
+        return "ry"
